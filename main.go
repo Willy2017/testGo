@@ -1,10 +1,9 @@
 package main
 
 import (
-
 	//"io"
-
 	"fmt"
+	"testGo/test"
 )
 
 /*type TestStruct struct {
@@ -13,10 +12,6 @@ import (
 	C int
 	D string
 }*/
-
-func testFunction(a *int) {
-	*a = 2
-}
 
 func main() {
 	//rand.Seed(time.Now().Unix())
@@ -34,7 +29,7 @@ func main() {
 	*/
 	a := 1
 	fmt.Printf("before testFunction, a=%d\n", a)
-	testFunction(&a)
+	test.TestFunction(&a)
 	fmt.Printf("after testFunction, a=%d\n", a)
 
 	b := 10
