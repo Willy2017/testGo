@@ -1,16 +1,12 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
 
 	//"io"
-	"log"
+	"bufio"
+	"fmt"
+	"io"
 	"os"
-	"reflect"
-	"strconv"
-	"strings"
-	"time"
 )
 
 /*type TestStruct struct {
@@ -21,28 +17,9 @@ import (
 }*/
 
 func main() {
-	// var a int
-	a := 8
-	fmt.Printf("hello world %d", a)
-	fmt.Println("type of a is", reflect.TypeOf(a))
-
-	var now time.Time = time.Now()
-	if a == 8 {
-		fmt.Println(now.Year(), now.Month(), now.Day(), now.Hour(), now.Minute(), now.Second())
-	}
-
-	reader := bufio.NewReader(os.Stdin)
-	input, err := reader.ReadString('\n')
-	if err != nil {
-		log.Fatal(err)
-	}
-	input = strings.TrimSpace(input)
-	grade, err := strconv.ParseFloat(input, 64)
-	if grade >= 60 {
-		fmt.Println("yes")
-	} else {
-		fmt.Println("no")
-	}
+	//rand.Seed(time.Now().Unix())
+	//target := rand.Intn(100)
+	//println(target)
 
 	// logger := log.Logger{};
 	/*
@@ -53,28 +30,28 @@ func main() {
 
 		fmt.Println(a[0].A, a[0].B, a[0].C, a[0].D)
 	*/
-	/*
-		const url = "C:\\Users\\Asus\\source\\repos\\Project2\\Debug\\marketdata-hc1710-20170608.txt"
 
-		// 開檔
-		inputFile, Error := os.Open(url)
-		// 判斷是否開檔錯誤
-		if Error != nil {
-			fmt.Println("開檔錯誤!")
+	const url = "C:\\Users\\Asus\\source\\repos\\Project2\\Debug\\marketdata-hc1710-20170608.txt"
+
+	// 開檔
+	inputFile, Error := os.Open(url)
+	// 判斷是否開檔錯誤
+	if Error != nil {
+		fmt.Println("開檔錯誤!")
+		return
+	}
+	// 離開時自動執行關檔
+	defer inputFile.Close()
+
+	inputReader := bufio.NewReader(inputFile)
+
+	for i := 0; i < 10; i++ {
+		inputString, err := inputReader.ReadString('\n')
+
+		if err == io.EOF {
+			fmt.Println("已讀取到檔尾!!")
 			return
 		}
-		// 離開時自動執行關檔
-		defer inputFile.Close()
-
-		inputReader := bufio.NewReader(inputFile)
-
-		for i := 0; i < 10; i++ {
-			inputString, Error := inputReader.ReadString('\n')
-
-			if Error == io.EOF {
-				fmt.Println("已讀取到檔尾!!")
-				return
-			}
-			fmt.Printf("%s\n", inputString)
-		}*/
+		fmt.Printf("%s\n", inputString)
+	}
 }
