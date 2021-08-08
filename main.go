@@ -35,4 +35,19 @@ func main() {
 	b := 10
 	c := &b
 	fmt.Printf("b=%d, *c=%d", b, *c)
+
+	var d map[int]int = make(map[int]int)
+	d[0] = 1
+	d[1] = 2
+
+	fmt.Println(d)
+
+	var l1 *test.ListNode = test.MakeList([]int{9, 2, 3})
+	var l2 *test.ListNode = test.MakeList([]int{4, 5, 6})
+
+	l3 := test.AddTwoNumbers(l1, l2)
+
+	for ; l3 != nil; l3 = l3.Next {
+		println(l3.Val)
+	}
 }
