@@ -50,4 +50,7 @@ func main() {
 	for ; l3 != nil; l3 = l3.Next {
 		println(l3.Val)
 	}
+
+	s := "pwwkew"
+	fmt.Println(test.LengthOfLongestSubstring(s))
 }

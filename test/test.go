@@ -1,5 +1,9 @@
 package test
 
+import (
+	"strings"
+)
+
 // Definition for singly-linked list.
 type ListNode struct {
 	Val  int
@@ -53,4 +57,27 @@ func MakeList(arr []int) *ListNode {
 
 func TestFunction(a *int) {
 	*a = 2
+}
+
+func LengthOfLongestSubstring(s string) int {
+
+	var max int
+	var t string = ""
+	for _, v := range s {
+		pos := strings.Index(t, string(v))
+		if pos == -1 {
+			t += string(v)
+			if max < len(t) {
+				max = len(t)
+			}
+		} else {
+			if pos < len(t)-1 {
+				t = t[pos+1:] + string(v)
+			} else {
+				t = string(v)
+			}
+		}
+	}
+
+	return max
 }
