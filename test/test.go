@@ -10,6 +10,20 @@ type ListNode struct {
 	Next *ListNode
 }
 
+func TwoSum(nums []int, target int) []int {
+	var prevMap map[int]int = make(map[int]int)
+	for i, num := range nums {
+		diff := target - num
+		value, ok := prevMap[diff]
+		if ok {
+			return []int{value, i}
+		}
+		prevMap[num] = i
+	}
+
+	return []int{0, 0}
+}
+
 func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var pRetListNode *ListNode = new(ListNode)
 	var pRoot *ListNode = pRetListNode
