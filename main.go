@@ -1,10 +1,12 @@
 package main
 
 import (
-	//"io"
 	"fmt"
+	"sync"
 	"testGo/test"
 )
+
+//"io"
 
 /*type TestStruct struct {
 	A int
@@ -14,6 +16,7 @@ import (
 }*/
 
 func main() {
+	fmt.Println("Main started!")
 	//rand.Seed(time.Now().Unix())
 	//target := rand.Intn(100)
 	//println(target)
@@ -27,30 +30,14 @@ func main() {
 
 		fmt.Println(a[0].A, a[0].B, a[0].C, a[0].D)
 	*/
-	a := 1
-	fmt.Printf("before testFunction, a=%d\n", a)
-	test.TestFunction(&a)
-	fmt.Printf("after testFunction, a=%d\n", a)
+	var wg sync.WaitGroup
+	var ch chan string
+	ch = make(chan string)
+	wg.Add(1)
+	go test.TestGoRoutine1(ch, &wg, 1)
+	wg.Add(1)
+	go test.TestGoRoutine2(ch, &wg, 2)
 
-	b := 10
-	c := &b
-	fmt.Printf("b=%d, *c=%d", b, *c)
-
-	var d map[int]int = make(map[int]int)
-	d[0] = 1
-	d[1] = 2
-
-	fmt.Println(d)
-
-	var l1 *test.ListNode = test.MakeList([]int{9, 2, 3})
-	var l2 *test.ListNode = test.MakeList([]int{4, 5, 6})
-
-	l3 := test.AddTwoNumbers(l1, l2)
-
-	for ; l3 != nil; l3 = l3.Next {
-		println(l3.Val)
-	}
-
-	s := "pwwkew"
-	fmt.Println(test.LengthOfLongestSubstring(s))
+	wg.Wait()
+	fmt.Println("Main finished!")
 }

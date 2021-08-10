@@ -1,7 +1,9 @@
 package test
 
 import (
+	"fmt"
 	"strings"
+	"sync"
 )
 
 // Definition for singly-linked list.
@@ -94,4 +96,17 @@ func LengthOfLongestSubstring(s string) int {
 	}
 
 	return max
+}
+
+func TestGoRoutine1(ch chan string, wg *sync.WaitGroup, id int) {
+	defer wg.Done()
+	str := "hi!"
+	ch <- str
+	fmt.Println("This is goRoutine", id, "!", str, "is sent")
+}
+
+func TestGoRoutine2(ch chan string, wg *sync.WaitGroup, id int) {
+	defer wg.Done()
+	str := <-ch
+	fmt.Println("This is goRoutine", id, "!", str, "is received!")
 }
